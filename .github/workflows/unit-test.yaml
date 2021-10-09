@@ -1,0 +1,23 @@
+name: Build
+on: [push, pull_request]
+jobs:
+  run:
+    name: The Quality Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Go 1.16
+        uses: actions/setup-go@v1
+        with:
+          go-version: 1.16
+
+      - name: Check out source code
+        uses: actions/checkout@v1
+
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v2
+
+      - name: Unit Test
+        run: make test
+
+      - name: Unit Test
+        run: make build
